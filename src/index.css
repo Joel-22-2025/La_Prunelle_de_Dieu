@@ -1,0 +1,289 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.625rem;
+
+  /* -------------------------------------------------------------------------
+   * Palette officielle « PRUNELLE DE DIEU »
+   * ---------------------------------------------------------------------- */
+  --background: #f0f3f8;          /* Fond général : gris-bleu très clair */
+  --foreground: #26384a;          /* Texte principal : bleu/gris très foncé */
+
+  --card: #fefefe;                /* Cartes : blanc cassé */
+  --card-foreground: #26384a;
+
+  --popover: #fefefe;
+  --popover-foreground: #26384a;
+
+  --primary: #079fbe;             /* Bleu principal / boutons : bleu cyan */
+  --primary-foreground: #ffffff;
+
+  --secondary: #e9eef5;
+  --secondary-foreground: #26384a;
+
+  --muted: #edf1f6;
+  --muted-foreground: #7c8795;    /* Texte secondaire : gris */
+
+  --accent: #e5f3f8;               /* Bleu ciel très pâle */
+  --accent-foreground: #1e3b57;
+
+  --destructive: #e84b55;          /* Rouge / rupture de stock */
+  --destructive-foreground: #ffffff;
+
+  --success: #18a77a;              /* Succès : vert */
+  --success-foreground: #ffffff;
+
+  --warning: #f6b53e;              /* Orange / alertes */
+  --warning-foreground: #26384a;
+
+  --border: #e5e9ef;               /* Bordures : gris très clair */
+  --input: #dde4ec;
+  --ring: #079fbe;
+
+  --chart-1: #079fbe;
+  --chart-2: #08a99b;              /* Turquoise / stock */
+  --chart-3: #0ea5c6;              /* Bleu clair */
+  --chart-4: #f6b53e;
+  --chart-5: #18a77a;
+
+  /* --- Sidebar marine ---------------------------------------------------- */
+  --sidebar: #05274a;              /* Bleu marine très foncé */
+  --sidebar-foreground: #e8f0f8;
+  --sidebar-primary: #079fbe;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #033051;       /* Bleu marine (secondaire) */
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #0a3a66;
+  --sidebar-ring: #079fbe;
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Couleurs annexes de la palette (constantes) */
+  --color-ocean: #0ea5c6;          /* Bleu ciel */
+  --color-turquoise: #08a99b;      /* Vert turquoise */
+  --color-navy: #05274a;           /* Bleu marine très foncé */
+  --color-navy2: #033051;          /* Bleu marine secondaire */
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+.dark {
+  --background: #0b1e33;
+  --foreground: #f0f3f8;
+
+  --card: #0f2740;
+  --card-foreground: #edf2f8;
+
+  --popover: #0f2740;
+  --popover-foreground: #edf2f8;
+
+  --primary: #0ea5c6;
+  --primary-foreground: #041424;
+
+  --secondary: #14304a;
+  --secondary-foreground: #edf2f8;
+
+  --muted: #122b42;
+  --muted-foreground: #93a6b8;
+
+  --accent: #14334e;
+  --accent-foreground: #eaf3fb;
+
+  --destructive: #e8737b;
+  --destructive-foreground: #ffffff;
+
+  --success: #23c08f;
+  --success-foreground: #041a17;
+
+  --warning: #f6b53e;
+  --warning-foreground: #26384a;
+
+  --border: rgb(255 255 255 / 10%);
+  --input: rgb(255 255 255 / 14%);
+  --ring: #079fbe;
+
+  --chart-1: #079fbe;
+  --chart-2: #08a99b;
+  --chart-3: #0ea5c6;
+  --chart-4: #f6b53e;
+  --chart-5: #18a77a;
+
+  --sidebar: #05274a;
+  --sidebar-foreground: #e8f0f8;
+  --sidebar-primary: #079fbe;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #033051;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #0a3a66;
+  --sidebar-ring: #079fbe;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Impression : masquer tout sauf la zone de facture (.print-area). */
+@media print {
+  /* Forcer les couleurs d'arrière-plan à l'impression. */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  html,
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-area {
+    display: block !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Facture pleine page (format A4). */
+  .facture-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    box-shadow: none !important;
+  }
+
+  /* Éviter les sauts de page en plein tableau de facture. */
+  .facture-lignes tr {
+    page-break-inside: avoid;
+  }
+}
+
+/* ===========================================================================
+   Toasts : étiquette colorée par type d'évènement (palette Prunelle de Dieu).
+   success = vert #18A77A · error = rouge #E84B55 · warning = orange #F6B53E
+   info/défaut = bleu #079FBE
+   =========================================================================== */
+.toaster [data-sonner-toast] {
+  border-radius: 0.75rem !important;
+  box-shadow: 0 8px 24px rgba(5, 39, 74, 0.14) !important;
+  border-left-width: 4px !important;
+}
+
+.toaster [data-sonner-toast][data-type='success'] {
+  border-left-color: #18a77a !important;
+  background: color-mix(in srgb, #18a77a 7%, var(--popover)) !important;
+}
+.toaster [data-sonner-toast][data-type='error'] {
+  border-left-color: #e84b55 !important;
+  background: color-mix(in srgb, #e84b55 7%, var(--popover)) !important;
+}
+.toaster [data-sonner-toast][data-type='warning'] {
+  border-left-color: #f6b53e !important;
+  background: color-mix(in srgb, #f6b53e 9%, var(--popover)) !important;
+}
+.toaster [data-sonner-toast][data-type='info'],
+.toaster [data-sonner-toast]:not([data-type='success']):not([data-type='error']):not([data-type='warning']) {
+  border-left-color: #079fbe !important;
+  background: color-mix(in srgb, #079fbe 7%, var(--popover)) !important;
+}
+
+/* Pastille d'icône aux couleurs exactes de la palette. */
+.toaster [data-sonner-toast][data-type='success'] [data-icon] {
+  background: #18a77a !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.toaster [data-sonner-toast][data-type='error'] [data-icon] {
+  background: #e84b55 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.toaster [data-sonner-toast][data-type='warning'] [data-icon] {
+  background: #f6b53e !important;
+  color: #05274a !important;
+  box-shadow: none !important;
+}
+.toaster [data-sonner-toast][data-type='info'],
+.toaster [data-sonner-toast]:not([data-type='success']):not([data-type='error']):not([data-type='warning']) [data-icon] {
+  background: #079fbe !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* Bouton de fermeture (X) toujours visible sous la pastille. */
+.toaster [data-sonner-close-button] {
+  background: color-mix(in srgb, currentColor 8%, transparent) !important;
+}
