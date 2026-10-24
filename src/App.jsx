@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import PublicRoute from '@/components/PublicRoute'
 import RoleRoute from '@/components/RoleRoute'
 import Layout from '@/components/Layout'
+import SplashScreen from '@/components/SplashScreen'
+import { useAuth } from '@/contexts/AuthContext'
 import Login from '@/pages/Login'
 import Dashboard from '@/pages/Dashboard'
 import Profil from '@/pages/Profil'
@@ -23,7 +26,35 @@ import StockSortie from '@/pages/admin/stock/StockSortie'
 import StockInventaire from '@/pages/admin/stock/StockInventaire'
 import StockMouvements from '@/pages/admin/stock/StockMouvements'
 
+// Durée minimale d'affichage du splash, puis durée du fondu de sortie (ms).
+const DUREE_SPLASH = 4200
+const DUREE_FONDU = 520
+
 export default function App() {
+  const { loading } = useAuth()
+
+  // Le splash reste visible au moins DUREE_SPLASH et tant que Firebase n'a
+  // pas résolu la session, puis disparaît en fondu.
+  const [minimumEcoule, setMinimumEcoule] = useState(false)
+  const [splashTermine, setSplashTermine] = useState(false)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setMinimumEcoule(true), DUREE_SPLASH)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  const splashEnSortie = minimumEcoule && !loading
+
+  useEffect(() => {
+    if (!splashEnSortie) return undefined
+    const timer = window.setTimeout(() => setSplashTermine(true), DUREE_FONDU)
+    return () => window.clearTimeout(timer)
+  }, [splashEnSortie])
+
+  if (!splashTermine) {
+    return <SplashScreen leaving={splashEnSortie} />
+  }
+
   return (
     <Routes>
       {/* Page publique : /login */}

@@ -287,3 +287,190 @@
 .toaster [data-sonner-close-button] {
   background: color-mix(in srgb, currentColor 8%, transparent) !important;
 }
+/* ===========================================================================
+   Écran de démarrage (splash) — animation avant la page de connexion.
+   =========================================================================== */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.65rem;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 42%, #0b1f3a, #050b18 75%);
+  color: #f4f8ff;
+  user-select: none;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.42s ease,
+    visibility 0.42s ease;
+}
+
+.splash-screen--out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-mark-wrap {
+  position: relative;
+  display: grid;
+  width: 200px;
+  height: 200px;
+  place-items: center;
+}
+
+.splash-glow {
+  position: absolute;
+  inset: -34px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(79, 195, 247, 0.32), rgba(79, 195, 247, 0) 70%);
+  filter: blur(4px);
+  animation: splash-beat 2.4s ease-in-out infinite;
+}
+
+.splash-mark {
+  position: relative;
+  width: 172px;
+  height: 172px;
+  filter: drop-shadow(0 14px 30px rgba(3, 15, 40, 0.55));
+  animation: splash-beat 2.4s ease-in-out infinite;
+}
+
+/* La vague monte dans la croix à l'ouverture, puis glisse en continu. */
+.splash-water {
+  animation: splash-rise 1.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+}
+
+.splash-wave {
+  animation: splash-wave 5s linear infinite;
+}
+
+.splash-wave--fast {
+  animation-duration: 3.2s;
+  animation-direction: reverse;
+}
+
+.splash-brand {
+  text-align: center;
+  animation: splash-brand-in 0.8s ease-out 0.15s both;
+}
+
+.splash-brand h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.splash-brand p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #9fb8d9;
+}
+
+.splash-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.splash-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #4fc3f7;
+  animation: splash-dot 1.4s ease-in-out infinite;
+}
+
+.splash-dots span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.splash-dots span:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes splash-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  8% {
+    transform: scale(1.045);
+  }
+  16% {
+    transform: scale(1);
+  }
+  24% {
+    transform: scale(1.03);
+  }
+  32% {
+    transform: scale(1);
+  }
+}
+
+@keyframes splash-rise {
+  from {
+    transform: translateY(190px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-wave {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes splash-brand-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-glow,
+  .splash-mark,
+  .splash-wave,
+  .splash-brand,
+  .splash-dots span {
+    animation: none;
+  }
+
+  .splash-water {
+    animation: none;
+  }
+
+  .splash-dots span {
+    opacity: 0.6;
+  }
+}

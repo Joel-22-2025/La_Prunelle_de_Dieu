@@ -9,7 +9,14 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { toast } from '@/components/ui/sonner'
 import { db } from '@/firebase/config'
 import { useAuth } from '@/contexts/AuthContext'
-import { createPharmacien, disableUser, enableUser, errAuthMsg } from '@/services/authService'
+import {
+  createPharmacien,
+  disableUser,
+  enableUser,
+  errAuthMsg,
+  LONGUEUR_MAX_MOT_DE_PASSE,
+  LONGUEUR_MIN_MOT_DE_PASSE,
+} from '@/services/authService'
 import { Button } from '@/components/ui/button'
 import { SpinnerInButton } from '@/components/ui/spinner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -52,6 +59,14 @@ function CreatePharmacienForm({ onCreated }) {
   const handleSubmit = async (event) => {
     event.preventDefault()
     setError('')
+
+    if (password.length < LONGUEUR_MIN_MOT_DE_PASSE || password.length > LONGUEUR_MAX_MOT_DE_PASSE) {
+      setError(
+        `Le mot de passe doit contenir entre ${LONGUEUR_MIN_MOT_DE_PASSE} et ${LONGUEUR_MAX_MOT_DE_PASSE} caractères.`,
+      )
+      return
+    }
+
     setCreating(true)
 
     try {
@@ -85,7 +100,19 @@ function CreatePharmacienForm({ onCreated }) {
       </div>
       <div>
         <Label htmlFor="np-password">Mot de passe temporaire</Label>
-        <Input id="np-password" type="text" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Au moins 6 caractères" />
+        <Input
+          id="np-password"
+          type="text"
+          required
+          minLength={LONGUEUR_MIN_MOT_DE_PASSE}
+          maxLength={LONGUEUR_MAX_MOT_DE_PASSE}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="6 à 10 caractères"
+        />
+        <p className="mt-1 text-xs text-muted-foreground">
+          Entre {LONGUEUR_MIN_MOT_DE_PASSE} et {LONGUEUR_MAX_MOT_DE_PASSE} caractères.
+        </p>
       </div>
 
       <div className="sm:col-span-2">

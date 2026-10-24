@@ -2,14 +2,16 @@
 // Page de profil (/profil)
 // ---------------------------------------------------------------------------
 // Affiche les informations du compte connecté : nom, prénom, email, rôle,
-// dates de création et de dernière connexion. Le Layout fournit la
-// barre latérale et la déconnexion.
+// dates de création et de dernière connexion, et permet de changer son mot
+// de passe via une modale. Le Layout fournit la barre latérale et la
+// déconnexion.
 // ===========================================================================
 import { useAuth } from '@/contexts/AuthContext'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import PageHeader from '@/components/PageHeader'
 import { RoleBadge } from '@/components/Badge'
+import ModalMotDePasse from '@/components/profil/ModalMotDePasse'
 import { formatDate } from '@/lib/format'
 
 function InfoRow({ label, value }) {
@@ -64,6 +66,16 @@ export default function Profil() {
           />
           <InfoRow label="Créé le" value={formatDate(profile?.createdAt)} />
           <InfoRow label="Dernière connexion" value={formatDate(profile?.lastLogin)} />
+        </CardContent>
+      </Card>
+
+      <Card className="py-5">
+        <CardHeader>
+          <CardTitle>Sécurité</CardTitle>
+          <CardDescription>Modifiez le mot de passe de votre compte.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ModalMotDePasse />
         </CardContent>
       </Card>
     </div>

@@ -17,7 +17,7 @@
 //   node scripts/creerAdmin.mjs <email> <motDePasse> <nom> <prenom>
 //
 // Exemple :
-//   node scripts/creerAdmin.mjs admin@prunelle.fr "MotDePasseFort123!" "Durand" "Jeanne"
+//   node scripts/creerAdmin.mjs admin@prunelle.fr "MotDePasse" "Durand" "Jeanne"
 // ===========================================================================
 import { cert, initializeApp } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
@@ -50,8 +50,14 @@ const [, , email, password, nom, prenom] = process.argv
 if (!email || !password || !nom || !prenom) {
   console.error(
     'Usage : node scripts/creerAdmin.mjs <email> <motDePasse> <nom> <prenom>\n' +
-      'Exemple : node scripts/creerAdmin.mjs admin@prunelle.fr "MotDePasseFort123!" Durand Jeanne',
+      'Exemple : node scripts/creerAdmin.mjs admin@prunelle.fr "MotDePasse" Durand Jeanne',
   )
+  process.exit(1)
+}
+
+// Règle métier : le mot de passe doit contenir entre 6 et 10 caractères.
+if (password.length < 6 || password.length > 10) {
+  console.error('Le mot de passe doit contenir entre 6 et 10 caractères.')
   process.exit(1)
 }
 
